@@ -1,0 +1,11 @@
+class Solution:
+    def isPalindrome(self, x):
+        s=str(x)
+        X=s[::-1]
+        if(s==X):
+            print("true")
+            return True
+            
+        else:
+            print("false")
+            return False
