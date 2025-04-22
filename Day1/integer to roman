@@ -1,0 +1,25 @@
+class Solution(object):
+    def intToRoman(self, num):
+        direct = {1:'I', 5:'V', 10:'X', 50:'L', 100:'C', 500:'D', 1000:'M' }
+        def find(n):
+            c = 1
+            while n//(c*10):
+              c*=10
+            return c
+        def gen(n, k):
+            if n in direct:
+                return direct[n]
+            else:
+                if n//k == 4:
+                    return gen(k, 0)+gen(n+ k, k)
+                elif n//k == 9:
+                    return gen(k, 0)+gen(n+ k, k*10)
+                else:
+                    t = 1
+                    for d in [1, 5, 10, 50, 100, 500, 1000]:
+                      if d<n:
+                        t = d
+                      else:
+                        break
+                    return gen(t, 0)+gen(n-t, find(n-t))
+        return gen(num, find(num))
