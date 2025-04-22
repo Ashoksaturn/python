@@ -1,0 +1,8 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        hesh_tab = {}
+        for idx, num in enumerate(nums):
+            desire = target - num
+            if desire in hesh_tab:
+                return[hesh_tab[desire], idx]
+            hesh_tab[num] = idx
