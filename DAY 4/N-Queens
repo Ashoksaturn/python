@@ -1,0 +1,36 @@
+class Solution:
+    def solveNQueens(self, n):
+        def safe(board, row, col):
+            # Check the column
+            for i in range(row):
+                if board[i][col] == 'Q':
+                    return False
+
+            # Check the diagonal (top-left to bottom-right)
+            for i, j in zip(range(row - 1, -1, -1), range(col - 1, -1, -1)):
+                if board[i][j] == 'Q':
+                    return False
+
+            # Check the diagonal (top-right to bottom-left)
+            for i, j in zip(range(row - 1, -1, -1), range(col + 1, n)):
+                if board[i][j] == 'Q':
+                    return False
+
+            return True
+        
+        def solveNqueen(board, row):
+            if row == n:  # If all queens are placed successfully
+                result.append([''.join(row) for row in board])  # Convert board to list of strings
+                return
+
+            for i in range(n):  # Try placing a queen in every column of the current row
+                if safe(board, row, i):
+                    board[row][i] = 'Q'  # Place the queen
+                    solveNqueen(board, row + 1)  # Recursively place queens in the next rows
+                    board[row][i] = '.'  # Backtrack
+
+        result = []
+        # Initialize an empty board with '.' representing empty cells
+        board = [['.' for _ in range(n)] for _ in range(n)]
+        solveNqueen(board, 0)
+        return result
