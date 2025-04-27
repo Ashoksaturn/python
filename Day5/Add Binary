@@ -1,0 +1,7 @@
+class Solution(object):
+    def addBinary(self, a, b):
+        a_dec=int(a,2)  # a convert binary (ex=11) to decimal 
+        b_dec=int(b,2)  # b convert binary(ex=1) to decimal
+        sum=bin(a_dec+b_dec) #ob100
+        print(sum[2:])# remove ob form binary give 100
+        return sum[2:]
