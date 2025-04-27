@@ -1,0 +1,24 @@
+class Solution(object):
+    def isNumber(self, s):
+        num, exp, sign, dec = False, False, False, False
+        for c in s:
+            if c.isdigit():
+                num = True
+            elif c in 'eE':
+                if exp or not num:
+                    return False
+                exp = True
+                sign = False
+                num = False
+                dec = False
+            elif c in '+-':
+                if sign or num or dec:
+                    return False
+                sign = True
+            elif c == '.':
+                if dec or exp:
+                    return False
+                dec = True
+            else:
+                return False
+        return num
