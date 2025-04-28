@@ -1,0 +1,27 @@
+class Solution:
+    def largestRectangleArea(self, heights):
+        result = 0
+        heights_stack = []
+        positions_stack = []
+        stacked_position = -1
+        stacked_height = -1
+        for i in range(0, len(heights)):
+            value = heights[i]
+            if len(heights_stack) == 0 or value > heights_stack[len(heights_stack) -1]:
+                heights_stack.append(value)
+                positions_stack.append(i)
+            elif value < heights_stack[len(heights_stack) - 1]:
+                while len(heights_stack) != 0 and value < heights_stack[len(heights_stack) -1]:
+                    stacked_position = positions_stack.pop()
+                    stacked_height = heights_stack.pop()
+                    size = stacked_height * (i - stacked_position) 
+                    result = max(result, size)
+                heights_stack.append(value)
+                positions_stack.append(stacked_position)
+        i+=1
+        while len(heights_stack) != 0:
+            stacked_position = positions_stack.pop()
+            stacked_height = heights_stack.pop()
+            size = stacked_height * (i - stacked_position) 
+            result = max(result, size)
+        return result  
