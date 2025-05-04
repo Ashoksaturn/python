@@ -1,0 +1,13 @@
+class Solution(object):
+    def maxPathSum(self, root):
+        self.m = root.val
+        def find(root):
+            if not root:
+                return 0
+            else:
+                a = find(root.left)
+                b = find(root.right)
+                self.m = max(self.m, root.val+a+b, root.val+a, root.val+b, root.val)
+                return max(root.val, root.val+ a, root.val+ b)
+        find(root)
+        return self.m
