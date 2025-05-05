@@ -1,0 +1,20 @@
+class Solution(object):
+    def maxPoints(self, points):
+        def cal_line(p1, p2):
+          if p1[0]!=p2[0]:
+            m = (p1[1]-p2[1])/float(p1[0]-p2[0])
+          else:
+            m = float('inf')
+          c = p1[1]-m*p1[0] if m!= float('inf') else p1[0]
+          return (m, c)
+        out = 1
+        for p1 in points:
+            d = {}
+            m = 0
+            for p2 in points:
+              if p1!=p2:
+                line = cal_line(p1, p2)
+                d[line] = d.get(line, 1)+1
+                m = max(m, d[line] )
+            out = max(out, m)
+        return out
