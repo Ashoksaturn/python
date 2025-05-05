@@ -1,0 +1,15 @@
+class Solution(object):
+    def canCompleteCircuit(self, gas, cost):
+        if sum(gas)>= sum(cost):
+            idx = -1
+            for i in range(len(gas)):
+              gas[i]= gas[i]-cost[i]
+              if idx==-1 and gas[i]>=0:
+                idx = i
+              elif idx != -1:
+                gas[i]+= gas[i-1]
+                if gas[i]<0:
+                    idx = -1
+            return idx
+        return -1
+        
