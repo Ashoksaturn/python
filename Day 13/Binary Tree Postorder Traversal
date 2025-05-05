@@ -1,0 +1,10 @@
+class Solution:
+    def postorderTraversal(self, root):
+        def post(root, arr):
+            if root:
+                post(root.left, arr)
+                post(root.right, arr)
+                arr.append(root.val)
+        arr = []
+        post(root, arr)
+        return arr
